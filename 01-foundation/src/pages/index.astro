@@ -1,16 +1,26 @@
 ---
+import Navbar from "../components/Navbar.astro"
+import MainLayouts from "../layouts/MainLayouts.astro"
 
+const name = 'Kratos1700'
+const title = 'Home Page'
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<MainLayouts title={title}>
+
+	<h1>{name}</h1>
+
+		<p>Dia actual: {new Date().toLocaleDateString()}</p>
+		<p>Hora actual: {new Date().toLocaleTimeString()}</p>
+		<p id="current-time">Hora actual dinamica: </p>
+
+</MainLayouts>
+
+
+	<script>
+		// Actualizar la hora cada segundo
+		const currentTime =document.querySelector('#current-time') as HTMLParagraphElement;
+		currentTime.innerText = `Hora actual dinamica: ${new Date().toLocaleTimeString()}`;
+	</script>
+
 </html>

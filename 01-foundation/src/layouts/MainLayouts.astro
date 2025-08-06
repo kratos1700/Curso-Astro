@@ -1,0 +1,36 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
+
+import '../styles/global.css'; // Import global styles
+
+//defiimos la interfaz Props para las propiedades que recibirá el componente
+//en este caso, solo recibirá una propiedad llamada title que es obligatoria
+// si ponemos ? al final de title, significa que es opcional
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title } = Astro.props; // aqui definimos que title es una propiedad que se pasará al componente MainLayouts
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <!-- Usamos la propiedad title para el título de la página -->
+     <ClientRouter />
+     <!-- Importamos el componente ClientRouter para manejar las transiciones de página -->
+  </head>
+  <body>
+    <Navbar />
+
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
