@@ -1,16 +1,18 @@
 ---
+// codigo Server Side Only - momento de construccion
+import type { PokemonListResponse } from "../interfaces/pokemon-list-response";
+import MainLayout from "../layouts/MainLayout.astro";
+import "../styles/global.css";
 
+const resp = await fetch("https://pokeapi.co/api/v2/pokemon"); // aqui hacemos una peticion a la API de Pokemon
+const data = (await resp.json()) as PokemonListResponse;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Pokémon Static Home">
+  <h1 class="text-4xl">Listado de Pokémon</h1>
+  <br />
+
+  <ul>
+    {data.results.map((pokemon) => <li>{pokemon.name}</li>)}
+  </ul>
+</MainLayout>
