@@ -2,18 +2,27 @@
 import type { GetStaticPaths } from "astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 import PokemonCard from "../../components/pokemons/PokemonCard.astro";
-
-/**
- * ESTA PARTE ES PARA DEFINIR RUTAS DINAMICAS
- */
+import type { PokemonListResponse } from "../../interfaces/pokemon-list-response";
 
 // esta funcion es para definir las rutas estaticas que se van a generar
 // en este caso, vamos a generar una ruta para cada pokemon que queramos mostrar
-export const getStaticPaths = (() => {
-    
-    return [
-        { params: { name: 'bulbasaur' }},
+export const getStaticPaths = (async() => {
 
+  const resp = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151'); // hacemos una peticion a la API de Pokemon
+  const {results} = await resp.json() as PokemonListResponse; // obtenemos los datos de la respuesta  
+
+  // devolvemos el array de rutas estaticas que vamos a generar
+  // cada ruta tendra el nombre del pokemon como parametro
+  return  results.map( item =>({
+    params: { name: item.name }, // definimos el nombre del pokemon como parametro de la ruta
+    props: { name: item.name, url: item.url } // pasamos las props al componente
+
+  }))
+
+
+   /*  return [
+        { params: { name: 'bulbasaur' }, 
+          props: { name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/' } },
 
         { params: { name: 'ivysaur' }, 
           props: { name: 'ivysaur', url: 'https://pokeapi.co/api/v2/pokemon/2/' } },
@@ -24,15 +33,16 @@ export const getStaticPaths = (() => {
         { params: { name: 'raticate' }, 
           props: { name: 'raticate', url: 'https://pokeapi.co/api/v2/pokemon/20/' } },
   ];
+}) satisfies GetStaticPaths; */
 }) satisfies GetStaticPaths;
 
 const { name } = Astro.params; // obtenemos el nombre del pokemon de la ruta
-//const {url} = Astro.props; // obtenemos la url del pokemon de las props
+const {url} = Astro.props; // obtenemos la url del pokemon de las props
 
-//const id = url.split('/').at(-2); // extraemos el ID del pokemon de la URL
+const id = url.split('/').at(-2); // extraemos el ID del pokemon de la URL
 
 // construimos la URL del sonido del pokemon
-//const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`
+const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`
 
 
 
@@ -51,12 +61,27 @@ const { name } = Astro.params; // obtenemos el nombre del pokemon de la ruta
     
   </div>
   
-  
  
-  
+  <PokemonCard name={name} url={url} />
+
+  <audio controls class="mt-5">
+    <source src={audioSrc} type="audio/ogg">
+    Your browser does not support the audio element.
+
+  </audio>
+
 
 </section>
 
 
 </MainLayout>
 
+<style>
+    
+
+    a {
+        @apply hover:underline;
+        color: blue;
+        
+    }
+</style>
