@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from "astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+// esta funcion es para definir las rutas estaticas que se van a generar
+// en este caso, vamos a generar una ruta para cada pokemon que queramos mostrar
+export const getStaticPaths = (() => {
+    
+    return [
+        { params: { name: 'bulbasaur' } },
+        { params: { name: 'charmander' } },
+        { params: { name: 'raticate' } },
+  ];
+}) satisfies GetStaticPaths;
+
+const { name } = Astro.params; // obtenemos el nombre del pokemon de la ruta
+---
+
+<!-- en esta pagina le pasamos el nombre del pokemon a la ruta -->
+
+<MainLayout title="Pokémon Static Detail">
+  <h1 class="text-4xl capitalize">{name}</h1>
+</MainLayout>
