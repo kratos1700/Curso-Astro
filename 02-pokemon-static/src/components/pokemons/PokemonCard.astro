@@ -1,22 +1,33 @@
 ---
-
 interface Props {
-    url: string;
-     name?: string;
+  url: string;
+  name: string;
+  isBig?: boolean; // optional prop to control image size
 }
 
-const { name, url } = Astro.props;
-const id = url.split('/').at(-2); // Extracting the Pokémon ID from the URL
+const { name, url, isBig = false } = Astro.props;
+const id = url.split("/").at(-2); // Extracting the Pokémon ID from the URL
 const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-
-
 ---
 
-<a
-href={`/pokemons/${name}`}
-class="rounded border flex flex-col justify-center items-center p-2 mt-5">
-  
-  <img src={imgSrc} alt={name} class="pokemon-image"  />
-  <h2 class="capitalize">{name}</h2>
+<!-- class="rounded border flex flex-col justify-center items-center p-2 mt-5"> -->
 
+<!-- Añadiendo condiciones para el tamaño de la tarjeta  -->
+<a
+  href={`/pokemons/${name}`}
+  class:list={[
+    "rounded flex flex-col justify-center items-center p-2 mt-5",
+    { border: !isBig },
+  ]}
+>
+  <img
+    class:list={[{ "w-75 h-75": isBig }]}
+    src={imgSrc}
+    alt={name}
+    class="pokemon-image"
+  />
+  <h2 class:list={["capitalize", { "text-4xl text-blue-300": isBig }]}>
+    #{id}
+    {name}
+  </h2>
 </a>
