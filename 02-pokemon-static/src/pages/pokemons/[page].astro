@@ -5,6 +5,7 @@ import type { GetStaticPaths } from "astro";
 import PokemonCard from "../../components/pokemons/PokemonCard.astro";
 import type { PokemonListResponse } from "../../interfaces/pokemon-list-response";
 import MainLayout from "../../layouts/MainLayout.astro";
+import Title from "@components/shared/title.astro";
 
 
 
@@ -22,8 +23,10 @@ const {page} = Astro.props; // obtenemos el numero de pagina de las props
 ---
 
 <MainLayout title="Pokémon Static Home">
-  <h1 class="text-4xl">Listado de Pokémons</h1>
-  <br />
+ 
+  <Title>
+    Listado de Pokémons Paginado
+  </Title>
 
 
 <section 

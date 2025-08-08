@@ -41,3 +41,12 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+# Iconos
+https://www.astroicon.dev/
+
+https://icon-sets.iconify.design/
+
+# Componentes
+
+https://www.creative-tim.com/twcomponents/component

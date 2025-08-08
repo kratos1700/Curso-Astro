@@ -1,5 +1,6 @@
 ---
 // codigo Server Side Only - momento de construccion
+import Title from "@components/shared/title.astro";
 import PokemonCard from "../components/pokemons/PokemonCard.astro";
 import type { PokemonListResponse } from "../interfaces/pokemon-list-response";
 import MainLayout from "../layouts/MainLayout.astro";
@@ -10,8 +11,9 @@ const data = (await resp.json()) as PokemonListResponse;
 ---
 
 <MainLayout title="Pokémon Static Home">
-  <h1 class="text-4xl">Listado de Pokémons</h1>
-  <br />
+<Title>
+    Listado de Pokémons
+  </Title>
 
 
 <section 
@@ -26,24 +28,8 @@ class ="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5  gap-4">
 </section>
 
 
-<section class="flex px-50 mt-10 gap-2 items-center">
-
-  <a class="nave" href="/pokemons/1">Ir a la navegación por paginación</a>
-
-</section>
 
 
 </MainLayout>
 
 
-<style>
- 
-  @reference "tailwindcss"; 
-
-  .nave {
-    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-md;
-
-  }
- 
-
-</style>
