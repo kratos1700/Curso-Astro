@@ -1,14 +1,18 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
+import { SITE_INFO } from "src/consts/site-info";
 
 
 interface Props {
-    title: string;
+    title?: string;
     description?: string;
+    image?: string;
 }
 
-const { title } = Astro.props; // aqui definimos que title es una propiedad que se pasará al componente MainLayouts
+const { title = SITE_INFO.title,
+     description = SITE_INFO.description, 
+     image } = Astro.props; // aqui definimos que title es una propiedad que se pasará al componente MainLayouts
 
 ---
 
@@ -18,7 +22,19 @@ const { title } = Astro.props; // aqui definimos que title es una propiedad que 
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
-        
+
+        <!-- SEO Meta Tags -->
+
+        <meta name="description" content={description} />
+        <meta name="author" content="Kratos1700" />
+        <meta name="keywords" content="Pokémon, Static Site, Astro" />
+
+
+        <!-- OG Meta Tags -->
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+
         <title>{title}</title>
         <!-- para las transiciones de página  antes eran los viewtransitions-->
         <ClientRouter />

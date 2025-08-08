@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths } from "astro";
-import MainLayout from "../../layouts/MainLayout.astro";
-import PokemonCard from "../../components/pokemons/PokemonCard.astro";
-import type { PokemonListResponse } from "../../interfaces/pokemon-list-response";
+import MainLayout from "@layouts/MainLayout.astro";
+import PokemonCard from "@components/pokemons/PokemonCard.astro";
+import type { PokemonListResponse } from "@interfaces/pokemon-list-response";
 
 // esta funcion es para definir las rutas estaticas que se van a generar
 // en este caso, vamos a generar una ruta para cada pokemon que queramos mostrar
@@ -42,15 +42,15 @@ const {url} = Astro.props; // obtenemos la url del pokemon de las props
 const id = url.split('/').at(-2); // extraemos el ID del pokemon de la URL
 
 // construimos la URL del sonido del pokemon
-const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`
-
-
-
+const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`;
+const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 ---
 
 <!-- en esta pagina le pasamos el nombre del pokemon a la ruta -->
 
-<MainLayout title="Pokémon Static Detail">
+<MainLayout title={`Pokémon - #${id} ${name}`} 
+description={`Información sobre el Pokémon ${name}`}
+image={imageSrc}>
 
 
 <section class="mt-10 mx-10 flex flex-col justify-center items-center">

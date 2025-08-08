@@ -9,7 +9,8 @@ interface Props {
 
 const { name, url, isBig = false } = Astro.props;
 const id = url.split("/").at(-2); // Extracting the Pokémon ID from the URL
-const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+// const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
 ---
 
