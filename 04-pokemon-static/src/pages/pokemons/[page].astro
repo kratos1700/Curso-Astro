@@ -1,0 +1,93 @@
+---
+import "../../styles/global.css";
+import type { GetStaticPaths } from "astro";
+// codigo Server Side Only - momento de construccion
+import PokemonCard from "../../components/pokemons/PokemonCard.astro";
+import type { PokemonListResponse } from "../../interfaces/pokemon-list-response";
+import MainLayout from "../../layouts/MainLayout.astro";
+import Title from "@components/shared/title.astro";
+
+
+
+
+export const getStaticPaths = (async({paginate}) => {
+  
+  const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151"); // aqui hacemos una peticion a la API de Pokemon
+  const data = (await resp.json()) as PokemonListResponse;
+  
+  return paginate(data.results, { pageSize:20})
+}) satisfies GetStaticPaths;
+
+const {page} = Astro.props; // obtenemos el numero de pagina de las props
+
+---
+
+<MainLayout title="Pokémon Static Home">
+ 
+  <Title>
+    Listado de Pokémons Paginado
+  </Title>
+
+
+<section 
+aria-label="Listado de Pokémons"
+class ="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5  gap-4">
+ 
+
+{page.data.map ((pokemon) => 
+  <PokemonCard name={pokemon.name} url={pokemon.url} />
+)}
+
+</section>
+
+
+<section class="flex px-10 mt-10 gap-2 items-center">
+
+{
+ 
+}
+
+  <a class:list ={[
+    "btn",
+    { disabled: !page.url.first }
+  ]}  href={page.url.first}>Ir al inicio</a>
+
+  <a class:list ={[
+    "btn",
+    { disabled: !page.url.prev }
+  ]}  href={page.url.prev}>Anteriores</a>
+
+  <a class:list = {[
+    "btn",
+    { disabled: !page.url.next }
+  ]}   href={page.url.next}>Siguientes</a>
+
+  <a class:list ={[
+    "btn",
+    { disabled: !page.url.last }
+  ]}  href={page.url.last}>Ir al final</a>
+
+
+  <div class="flex flex-1">
+    
+  </div>
+  <span class="text-xl font-bold"> Pagina {page.currentPage}</span>
+
+</section>
+
+
+</MainLayout>
+
+<style>
+ @reference "../../styles/global.css";
+ /* @reference "tailwindcss";  sirven de las dos formas */
+
+  .btn {
+    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-md;
+
+  }
+  .disabled {
+      @apply bg-gray-600 text-gray-400;
+    }
+
+</style>

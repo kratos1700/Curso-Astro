@@ -1,0 +1,72 @@
+---
+import PokemonCard from "@components/pokemons/PokemonCard.astro";
+import type { PokemonListResponse } from "@interfaces/pokemon-list-response";
+import MainLayout from "@layouts/MainLayout.astro";
+import type { GetStaticPaths } from "astro";
+
+
+export const getStaticPaths = (async() => {
+    const resp = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151'); // hacemos una peticion a la API de Pokemon
+  const {results} = await resp.json() as PokemonListResponse; // obtenemos los datos de la respuesta  
+
+  
+  return results.map( item =>{
+
+    const id = item.url.split('/').at(-2); // extraemos el ID del pokemon de la URL
+
+    return {
+      params: { id: id }, // definimos el nombre del pokemon como parametro de la ruta
+      props: { name: item.name, url: item.url } // pasamos las props al componente
+    }
+  })
+}) satisfies GetStaticPaths;
+
+
+const {id} = Astro.params; // obtenemos el id del pokemon de los parametros de la ruta
+const {url, name} = Astro.props; // obtenemos la url del pokemon de las props
+
+// construimos la URL del sonido del pokemon
+const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`
+
+
+
+
+---
+
+<MainLayout title="Holaass">
+
+
+<section class="mt-10 mx-10 flex flex-col justify-center items-center">
+ 
+  <div>
+    <a href="/"> Regresar</a>
+    <h1 class="text-5xl capitalize">{name}</h1>
+    
+  </div>
+  
+ 
+  <PokemonCard name={name} url={url} isBig = {true}/>
+
+  <audio controls class="mt-5">
+    <source src={audioSrc} type="audio/ogg">
+    Your browser does not support the audio element.
+
+  </audio>
+
+
+</section>
+
+
+  
+</MainLayout>
+
+
+<style>
+    @reference "../../styles/global.css";
+
+    a {
+        @apply hover:underline text-blue-500;
+       
+        
+    }
+</style>
