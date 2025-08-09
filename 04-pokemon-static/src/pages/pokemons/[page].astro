@@ -5,7 +5,7 @@ import type { GetStaticPaths } from "astro";
 import PokemonCard from "../../components/pokemons/PokemonCard.astro";
 import type { PokemonListResponse } from "../../interfaces/pokemon-list-response";
 import MainLayout from "../../layouts/MainLayout.astro";
-import Title from "@components/shared/title.astro";
+import Title from "@components/shared/Title.astro";
 
 
 
@@ -31,7 +31,7 @@ const {page} = Astro.props; // obtenemos el numero de pagina de las props
 
 <section 
 aria-label="Listado de Pokémons"
-class ="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5  gap-4">
+class ="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5  gap-4">
  
 
 {page.data.map ((pokemon) => 

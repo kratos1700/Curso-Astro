@@ -52,7 +52,7 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
   image={imageSrc}
 >
   <section class="mt-10 mx-10 flex flex-col justify-center items-center">
-    <div class=" flex flex-row ">
+    <div class="flex flex-row">
       <div>
         <button onclick="history.back()" class="text-blue-500">
           Regresar
@@ -63,10 +63,14 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
         </Title>
       </div>
 
-      <button id="btn-favorite" class="text-red-500 ml-2">
-        <Icon name="heart-empty" size={40}/>
-        <Icon class="hidden" name="heart-full2" size={40} />
-       
+      <button
+        id="btn-favorite"
+        class="text-red-500 ml-2"
+        data-name={name}
+        data-id={id}
+      >
+        <Icon data-outline name="heart-empty" size={40} />
+        <Icon data-full class="hidden" name="heart-full2" size={40} />
       </button>
     </div>
 
@@ -79,6 +83,73 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
   </section>
 </MainLayout>
 
+<script>
+  interface FavoritePokemon {
+    id: number;
+    name: string;
+  }
+
+  const handlePage = () => {
+    let favoritePokemons: FavoritePokemon[] = JSON.parse(
+      localStorage.getItem('favorites') ?? "[]"
+    );
+
+    // Obtenemos del botón de favorito sus datos
+    const btnFavorite = document.querySelector(
+      "#btn-favorite"
+    ) as HTMLButtonElement;
+
+    if (!btnFavorite) return;
+
+    const name = btnFavorite.dataset.name ?? "";
+    const id = btnFavorite.dataset.id ?? "";
+    const isFavorite = favoritePokemons.some((fav) => fav.name === name);
+
+    // Creamos el objeto del pokemon favorito
+    const heartOutline = btnFavorite.querySelector(
+      "[data-outline]"
+    ) as HTMLElement;
+    const heartFull = btnFavorite.querySelector("[data-full]") as HTMLElement;
+
+    // funcion para mostrar o ocultar btnfavoritos 
+      if (isFavorite) {
+
+       heartOutline.classList.add("hidden");
+        heartFull.classList.remove("hidden");
+      } 
+    
+
+
+    const toggleFavorite = () => {
+      const isFavorite = favoritePokemons.some((fav) => fav.name === name);
+      if (isFavorite) {
+        // Si ya es favorito, lo eliminamos
+        favoritePokemons = favoritePokemons.filter((fav) => fav.name !== name);
+      } else {
+        // Agregamos el pokemon a favoritos
+        favoritePokemons.push({
+          id: +id,
+          name: name,
+        });
+      }
+      // Guardamos los cambios en localStorage
+      localStorage.setItem('favorites', JSON.stringify(favoritePokemons));
+    };
+
+    btnFavorite.addEventListener("click", () => {
+      // ocultamos o mostramos el pokemon favorito
+      heartOutline.classList.toggle("hidden");
+      heartFull.classList.toggle("hidden");
+
+      toggleFavorite();
+      
+    });
+  };
+
+  // con 'astro:page-load' hacemos que el script se ejecute cuando la pagina se carga
+  document.addEventListener("astro:page-load", handlePage);
+</script>
+
 <style>
   @reference "../../styles/global.css";
   a {
@@ -87,8 +158,6 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
   }
 
   #btn-favorite {
-    
     @apply hover:animate-pulse;
-    
   }
 </style>

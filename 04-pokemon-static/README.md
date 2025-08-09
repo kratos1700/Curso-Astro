@@ -50,3 +50,9 @@ https://icon-sets.iconify.design/
 # Componentes
 
 https://www.creative-tim.com/twcomponents/component
+
+# Añadida integración a SolidJs
+```
+npx astro add solid
+
+```
