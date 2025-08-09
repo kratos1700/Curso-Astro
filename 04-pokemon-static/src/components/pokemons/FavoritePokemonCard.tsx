@@ -37,7 +37,9 @@ export const FavoritePokemonCard: Component<Props> = (props) => {
 
             <div class='flex flex-col justify-center items-center'>
                 <a href={`/pokemons/${props.pokemon.name}`}>
-                    <img src={imgSrc} alt={props.pokemon.name} class='w-32 h-32' />
+                    <img src={imgSrc} alt={props.pokemon.name} class='w-32 h-32' style={
+                        `view-transition-name: ${props.pokemon.name}-image`
+                    }/>
 
                     <p class="capitalize">#{props.pokemon.id} - {props.pokemon.name}</p>
                 </a>
