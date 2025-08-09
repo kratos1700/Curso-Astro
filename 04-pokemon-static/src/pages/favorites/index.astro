@@ -1,5 +1,7 @@
 ---
-import { Counter } from "@components/Counter";
+
+
+import { FavoritePokemons } from "@components/pokemons/FavoritePokemons";
 import Title from "@components/shared/Title.astro";
 import MainLayout from "@layouts/MainLayout.astro";
 
@@ -13,7 +15,6 @@ import MainLayout from "@layouts/MainLayout.astro";
     Favoritos
   </Title>
 
-<!-- ejecutando la funcionalidad del contador como isla de astro en SolidJs -->
-  <Counter client:load />
+<FavoritePokemons client:only="solid-js" />
 
 </MainLayout>

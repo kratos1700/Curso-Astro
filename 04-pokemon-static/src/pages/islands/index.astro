@@ -1,0 +1,36 @@
+---
+import { Counter } from "@components/Counter";
+import Title from "@components/shared/Title.astro";
+import MainLayout from "@layouts/MainLayout.astro";
+
+const counterValue = 20;
+
+---
+
+<MainLayout title="Favoritos">
+
+   
+<!-- ejecutando la funcionalidad del contador como isla de astro en SolidJs -->
+  <!-- <Counter client:load /> -->
+   
+   <!-- Siempre poner una directiva para que se pueda utilizar en el cliente -->
+    <!-- Le pasamos al componente  Solid-Js Counter el valor inicial del contador -->
+  <Counter 
+  transition:persist="counter"
+  transition:persist-props
+  client:only = "solid-js" initialCount={counterValue} >
+
+  <Title>
+    Contador Islas
+  </Title>
+
+</Counter>
+
+  <video controls muted autoplay transition:persist>
+  <source
+    src="https://ia804502.us.archive.org/33/items/GoldenGa1939_3/GoldenGa1939_3_512kb.mp4"
+    type="video/mp4"
+    />
+  </video>
+
+</MainLayout>
