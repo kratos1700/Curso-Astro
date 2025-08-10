@@ -1,8 +1,40 @@
 ---
 import '../styles/global.css';
 import MainLayout from '../layouts/MainLayout.astro';
+import { siteConfig } from '../config/site-config';
+import BlogPosts from '../components/BlogPosts.astro';
 ---
 
 <MainLayout title="Astro Blog">
-	<h1 class="text-5xl">Holaasss</h1>
+	
+
+
+<!-- component -->
+<section class="bg-gray-900">
+    <div class="container px-6 py-10 mx-auto">
+        <h1 class="text-3xl font-semiboldcapitalize lg:text-4xl text-white">{siteConfig.title}</h1>
+
+      
+
+			<BlogPosts />
+		
+            
+
+            
+            
+
+           
+
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
 </MainLayout>

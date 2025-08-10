@@ -50,3 +50,12 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 https://docs.astro.build/en/guides/integrations-guide/mdx/
 
 https://docs.astro.build/en/guides/markdown-content/
+
+
+## Estilo de blog
+
+https://www.creative-tim.com/twcomponents/component/grid-blog-page
+
+## Astro render
+
+https://docs.astro.build/en/reference/api-reference/
