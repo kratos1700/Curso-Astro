@@ -41,3 +41,12 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+
+
+## Markdown y MDX configuración
+
+https://docs.astro.build/en/guides/integrations-guide/mdx/
+
+https://docs.astro.build/en/guides/markdown-content/

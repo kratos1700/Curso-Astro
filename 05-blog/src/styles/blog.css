@@ -1,0 +1,78 @@
+
+
+
+
+html {
+  background-color: #1a202c; /* bg-gray-900 */
+  padding-left: 2.5rem;      /* px-10 */
+  padding-right: 2.5rem;
+}
+
+body {
+  margin-top: 2.5rem;        /* mt-10 */
+}
+
+h1 {
+  font-size: 1.875rem;       /* text-3xl */
+  color: #fff;               /* text-white */
+  margin-top: 1.25rem;       /* my-5 */
+  margin-bottom: 1.25rem;
+}
+
+h2 {
+  font-size: 1.5rem;         /* text-2xl */
+  color: #3b82f6;            /* text-blue-500 */
+  margin-top: 1.25rem;       /* my-5 */
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-size: 1.25rem;        /* text-xl */
+  color: #fff;               /* text-white */
+  margin-top: 1.25rem;       /* my-5 */
+  margin-bottom: 1.25rem;
+}
+
+p {
+  color: #fff;               /* text-white */
+  margin-top: 1.25rem;       /* my-5 */
+  margin-bottom: 1.25rem;
+}
+
+a {
+  color: #3b82f6;            /* text-blue-500 */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline; /* hover:underline */
+}
+
+
+/* html {
+  @apply bg-gray-900 px-10;
+}
+
+body {
+  @apply mt-10;
+}
+
+h1 {
+  @apply text-3xl text-white my-5;
+}
+
+h2 {
+  @apply text-2xl text-blue-500 my-5;
+}
+
+h3 {
+  @apply text-xl text-white my-5;
+}
+
+p {
+  @apply text-white my-5;
+}
+
+a {
+  @apply text-blue-500 hover:underline;
+} */
