@@ -1,7 +1,14 @@
 ---
 import { Formatter } from '@utils/formatter';
-const { frontmatter, url, ...resto } = Astro.props;
+import type { CollectionEntry } from 'astro:content';
 
+
+interface Props {
+  post:CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const frontmatter = post.data;
 ---
 
 
@@ -16,7 +23,7 @@ const { frontmatter, url, ...resto } = Astro.props;
 
     <div class="flex flex-col justify-between py-6 lg:mx-6">
       <a
-        href={url}
+        href={`/posts/${post.slug}`}
         class="text-xl font-semibold hover:underlinetext-white"
       >
        {frontmatter.description}

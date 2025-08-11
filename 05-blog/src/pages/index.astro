@@ -3,9 +3,12 @@ import '../styles/global.css';
 import MainLayout from '../layouts/MainLayout.astro';
 import { siteConfig } from '../config/site-config';
 import BlogPosts from '../components/BlogPosts.astro';
+import { getCollection } from 'astro:content';
+import TypeBlogPosts from '@/components/TypeBlogPosts.astro';
 
 //const posts = await Astro.glob('./posts/*.{md,mdx}'); // con esto cargamos todos los posts 
 
+const blogPosts = await getCollection('blog'); // con esto cargamos todos los posts de la coleccion blog
 ---
 
 <MainLayout title="Astro Blog">
@@ -21,11 +24,11 @@ import BlogPosts from '../components/BlogPosts.astro';
 			<!-- <BlogPosts /> -->
 
             <!-- Creamos el componente BlogPosts  y le pasamos las props necesarias -->
-	<!-- 	<div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
-            {posts.map((post) => (
-                <BlogPosts {...post} />
+		<div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
+            {blogPosts.map((post) => (
+                <TypeBlogPosts post={post} />
             ))}
-        </div> -->
+        </div> 
             
         </div>
     </div>

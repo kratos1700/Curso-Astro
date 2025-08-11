@@ -6,6 +6,7 @@ html {
   background-color: #1a202c; /* bg-gray-900 */
   padding-left: 2.5rem;      /* px-10 */
   padding-right: 2.5rem;
+  scroll-behavior: smooth;
 }
 
 body {

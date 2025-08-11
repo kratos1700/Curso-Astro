@@ -18,13 +18,14 @@ const frontmatter = resto.frontmatter;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
    
-    <title>{frontmatter.title}</title>
+    <!-- <title>{frontmatter.title}</title> -->
+    <title>{title}</title>
 
     <ClientRouter />
   </head>
   <body class="bg-gray-900 text-white">
 
-    <a href="/"> Regresar</a>
+    <a href="/" id="back-link"> Regresar</a>
 
     <main class="mb-10 max-w-5xl m-auto px-2 py-2">
       <slot />
