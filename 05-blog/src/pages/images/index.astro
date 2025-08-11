@@ -1,0 +1,32 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+ import '@styles/global.css';
+import { Image } from "astro:assets";
+
+import post05Image from '@images/post-05.png';
+
+---
+
+<MainLayout title="Imagenes">
+
+    <h1 class="text-5xl text-white">
+        Imágenes
+    </h1>
+
+    <img loading="eager" src="/public/assets/images/post-05.png" width="250" 
+    height="250" alt=""/>
+
+
+    <!-- Convertimos imagen para WebP y asi optimizar la carga
+    Tiene que estar en una carpeta diferente de public     
+    -->
+<Image src={post05Image} width="250" 
+    height="250" alt="post images5"/>
+
+    <div style={{heigth:'3000px'}}></div>
+
+    <img loading="lazy" src="/public/assets/images/post-01.png" width="250" 
+    height="250" alt=""/>
+
+
+</MainLayout>
