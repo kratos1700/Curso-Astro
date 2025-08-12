@@ -3,6 +3,7 @@ import '@styles/global.css';
 import type { GetStaticPaths } from "astro";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import { getCollection } from "astro:content";
+import { Image } from 'astro:assets';
 
 export const  getStaticPaths = (async() => {
     
@@ -35,6 +36,19 @@ const { Content, headings } = await post.render();
 
     <h1 class='text-xs text-gray-500 mb-0'>{frontmatter.title}</h1>
     <h4 class="text-md text-gray-400 mb-0">{frontmatter.author}</h4>
+
+
+
+
+     <Image
+    class="w-full my-5 h-[300px] rounded-lg object-cover"
+      src={frontmatter.image}
+      alt={frontmatter.title}
+      width={600}
+      height={600}
+      transition:name={`${post.slug}-image`}
+      loading="lazy"/>
+
 
     <!-- Creamos una lista numerada para la tabla de contenidos ya que le headings
     contienen un slug y un texto 
