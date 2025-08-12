@@ -4,6 +4,8 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import { Image } from "astro:assets";
 
 import post05Image from '@images/post-05.png';
+import post03Image from '@images/post-03.png';
+import { Picture } from "astro:assets";
 
 ---
 
@@ -20,8 +22,60 @@ import post05Image from '@images/post-05.png';
     <!-- Convertimos imagen para WebP y asi optimizar la carga
     Tiene que estar en una carpeta diferente de public     
     -->
+    <h1>Quality webp</h1>
 <Image src={post05Image} width="250" 
     height="250" alt="post images5"/>
+
+    <h1>Quality low</h1>
+    <Image src={post05Image} 
+        quality= "low"
+        width="250" 
+    height="250" alt="post images5"/>
+
+
+
+     <h1>Quality high</h1>
+    <Image src={post03Image} 
+        quality= "high",
+        width="250" 
+    height="250" alt="post images5"/>
+
+
+    <h1>Formatos</h1>
+    <Image src={post03Image} 
+   format="avif"
+    width="250" 
+    height="250" alt="post images5"/>
+
+<!-- Con picture formats decimos que el navegador 
+ elija el mejor formato que sea compatible -->
+    <h1>Picture</h1>
+    <Picture 
+    src={post03Image} 
+    formats={['jpg', 'heic', 'webp']}
+    width="250" 
+    height="250" 
+    alt="post images5" />
+
+    <!--https://docs.astro.build/en/reference/modules/astro-assets/#sizes -->
+    <h1>varios en funcion de la pantalla</h1>
+    <Picture 
+    src={post03Image}   
+    widths={[240, 540, 720, post03Image.width]}
+    sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${post03Image.width}px`}
+    width="250" 
+    height="250" 
+    alt="post images5" />
+
+
+<!--  -->
+    <h1>Por densidades</h1>
+    <Picture 
+    src={post03Image}   
+    width={post03Image.width / 2}
+  densities={[1.5, 2]}
+  
+    alt="post images5" />
 
     <div style={{heigth:'3000px'}}></div>
 
@@ -30,3 +84,9 @@ import post05Image from '@images/post-05.png';
 
 
 </MainLayout>
+
+<style>
+    h1 {
+        margin-top: 20px;
+    }
+    </style>
